@@ -70,11 +70,11 @@ export default function Modern({ data, scale = 1, colors = defaultColors }: Mode
           >
             {data.personalInfo.name}
           </h1>
-          <h2 className="text-xl text-gray-600 mb-4">
+          <h2 className="text-xl font-medium text-gray-700 mb-4">
             {data.personalInfo.title}
           </h2>
           
-          <div className="grid grid-cols-2 gap-2 text-sm">
+          <div className="grid grid-cols-2 gap-2 text-sm text-gray-700">
             <div className="flex items-center gap-2">
               <Mail className="w-4 h-4" style={{ color: colors.accent }} />
               <span>{data.personalInfo.email}</span>
@@ -112,7 +112,7 @@ export default function Modern({ data, scale = 1, colors = defaultColors }: Mode
 
       {/* Summary */}
       <div className="mb-8">
-        <p className="text-gray-700 leading-relaxed">
+        <p className="text-gray-800 leading-relaxed">
           {data.personalInfo.summary}
         </p>
       </div>
@@ -133,16 +133,16 @@ export default function Modern({ data, scale = 1, colors = defaultColors }: Mode
                   <h4 className="text-lg font-semibold" style={{ color: colors.primary }}>
                     {exp.title}
                   </h4>
-                  <div className="text-gray-600">{exp.company} • {exp.location}</div>
+                  <div className="text-gray-700">{exp.company} • {exp.location}</div>
                 </div>
-                <div className="text-gray-600 text-sm">
+                <div className="text-gray-700 text-sm">
                   {exp.startDate} - {exp.current ? 'Present' : exp.endDate}
                 </div>
               </div>
               {exp.description ? (
-                <p className="text-gray-700">{exp.description}</p>
+                <p className="text-gray-800">{exp.description}</p>
               ) : exp.highlights ? (
-                <ul className="list-disc list-inside space-y-1 text-gray-700">
+                <ul className="list-disc list-inside space-y-1 text-gray-800">
                   {exp.highlights.map((highlight, idx) => (
                     <li key={idx}>{highlight}</li>
                   ))}
@@ -169,16 +169,16 @@ export default function Modern({ data, scale = 1, colors = defaultColors }: Mode
                   <h4 className="text-lg font-semibold" style={{ color: colors.primary }}>
                     {edu.degree}
                   </h4>
-                  <div className="text-gray-600">{edu.school} • {edu.location}</div>
+                  <div className="text-gray-700">{edu.school} • {edu.location}</div>
                 </div>
-                <div className="text-gray-600 text-sm">
+                <div className="text-gray-700 text-sm">
                   {edu.startDate} - {edu.endDate}
                 </div>
               </div>
               {edu.description ? (
-                <p className="text-gray-700">{edu.description}</p>
+                <p className="text-gray-800">{edu.description}</p>
               ) : edu.highlights ? (
-                <ul className="list-disc list-inside space-y-1 text-gray-700">
+                <ul className="list-disc list-inside space-y-1 text-gray-800">
                   {edu.highlights.map((highlight, idx) => (
                     <li key={idx}>{highlight}</li>
                   ))}
@@ -210,7 +210,7 @@ export default function Modern({ data, scale = 1, colors = defaultColors }: Mode
                 {skillGroup.items.map((skill, idx) => (
                   <span 
                     key={idx} 
-                    className="px-3 py-1 rounded-full text-sm"
+                    className="px-3 py-1 rounded-full text-sm font-medium"
                     style={{ 
                       backgroundColor: `${colors.secondary}20`,
                       color: colors.primary

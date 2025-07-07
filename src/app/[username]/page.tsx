@@ -1,13 +1,25 @@
 "use client"
 
+import { Metadata } from 'next';
 import ResumePreview from '@/components/ResumePreview';
 import { ResumeData } from '@/types/resume';
 import { templates } from '@/data/templates';
 
-export default function ShareableResume({ params }: { params: { username: string } }) {
+type Props = {
+  params: { username: string }
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  return {
+    title: `${params.username}'s Resume`,
+    description: `View ${params.username}'s professional resume`,
+  }
+}
+
+async function getResumeData(username: string): Promise<ResumeData> {
   // Mock data; replace with API or query params in production
-  const resumeData: ResumeData = {
-    name: params.username || 'NAME',
+  return {
+    name: username || 'NAME',
     jobTitle: 'Frontend Developer',
     cnic: '*****',
     religion: 'Islam',
@@ -27,6 +39,10 @@ export default function ShareableResume({ params }: { params: { username: string
     certificate: ['Certified Cloud Applied Generative AI Engineering', 'Governor House', '2023-25'],
     profileImage: '/images/default-image.webp',
   };
+}
+
+export default async function ShareableResume({ params }: Props) {
+  const resumeData = await getResumeData(params.username);
 
   // Use the Modern template by default
   const defaultTemplate = templates.find(t => t.id === 'modern')?.component;

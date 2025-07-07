@@ -124,13 +124,7 @@ export default function InteractiveChatDemo() {
           <h2 className="text-4xl font-orbitron font-bold text-center gradient-text-3d">
             Try Our AI Counselor
           </h2>
-          <Link 
-            href="/AI-counseling" 
-            className="btn-futuristic-3d px-4 py-2 text-sm flex items-center hover:scale-105 transition-transform"
-          >
-            Full Version
-            <ExternalLink className="w-4 h-4 ml-2" />
-          </Link>
+         
         </div>
 
         {/* Chat Container */}
@@ -142,11 +136,17 @@ export default function InteractiveChatDemo() {
           {/* Main Chat Card */}
           <div className="relative card-futuristic-3d p-8 backdrop-blur-xl bg-black/40 border border-white/10 rounded-xl shadow-2xl">
             {/* Chat Header */}
-            <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-r from-purple-500/10 via-cyan-500/10 to-blue-500/10 rounded-t-xl backdrop-blur-md border-b border-white/10 flex items-center px-6">
+            <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-r from-purple-500/10 via-cyan-500/10 to-blue-500/10 rounded-t-xl backdrop-blur-md border-b border-white/10 flex justify-between px-6">
               <div className="flex items-center space-x-3">
                 <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
                 <span className="text-white/80 font-medium">AI Career Counselor</span>
               </div>
+              <Link 
+            href="/AI-counseling" 
+            className="btn-futuristic-3d bg px-4 py-2 text-sm flex items-center hover:scale-105 transition-transform"
+          >
+            <ExternalLink className="w-4 h-4 ml-2 text-white/80" />
+          </Link>
             </div>
 
             {/* Messages Container */}
@@ -205,7 +205,7 @@ export default function InteractiveChatDemo() {
               ))}
 
               {isThinking && (
-                <div className="flex justify-start items-end space-x-3">
+                <div className=" flex justify-start items-end space-x-3">
                   <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 p-0.5">
                     <div className="w-full h-full bg-black/40 backdrop-blur-xl rounded-[10px] flex items-center justify-center">
                       <Bot className="w-6 h-6 text-cyan-400" />

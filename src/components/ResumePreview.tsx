@@ -1,3 +1,5 @@
+"use client";
+
 import { ResumeData } from '../types/resume';
 import ProfileImage from './ProfileImage';
 import PersonalInfo from './PersonalInfo';
