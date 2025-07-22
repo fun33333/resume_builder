@@ -82,30 +82,45 @@ export default function InteractiveChatDemo() {
     }
   };
 
+  // Urdu roman: Yeh function ab backend ko call karta hai, hardcoded responses nahi deta.
+  // English: This function now calls the backend, does not use hardcoded responses.
   const handleSendMessage = async (message: string = userInput.trim()) => {
     if (message) {
       setIsSubmitting(true);
       setUserInput('');
-      
-      setChatMessages(prev => [...prev, { 
-        type: 'user', 
+
+      // Add user message to chat
+      setChatMessages(prev => [...prev, {
+        type: 'user',
         message,
         timestamp: new Date()
       }]);
 
-      let response = '';
-      if (message.toLowerCase().includes('tech career')) {
-        response = "Switching to a tech career is an excellent choice! I recommend starting with these steps:\n\n1. Identify your target role (developer, designer, etc.)\n2. Learn fundamental skills through online courses\n3. Build a portfolio of projects\n4. Network with professionals in the field\n\nWould you like me to elaborate on any of these steps?";
-      } else if (message.toLowerCase().includes('skills')) {
-        response = "Currently, the most in-demand skills include:\n\n• Full-stack development (React, Node.js)\n• Cloud computing (AWS, Azure)\n• AI/Machine Learning (Python, TensorFlow)\n• Data Analytics (SQL, Python)\n• Cybersecurity\n\nWould you like me to create a personalized learning path for any of these areas?";
-      } else if (message.toLowerCase().includes('career path')) {
-        response = "I'll help you create a personalized career path. Let's start by understanding:\n\n• Your current background\n• Your interests and strengths\n• Your career goals\n• Your timeline\n\nWhich would you like to discuss first?";
-      } else {
-        response = "I understand you're looking for career guidance. I can help you with:\n\n• Career path planning\n• Skill development recommendations\n• Industry insights\n• Resume optimization\n\nWhat specific aspect would you like to explore?";
-      }
+      try {
+        const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+        // Update: Remove '/api' and use '/chat' endpoint
+        const response = await fetch(`${API_URL}/chat`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          // Update: Only send 'message' (and optionally 'history') as per backend
+          body: JSON.stringify({ message }),
+        });
 
-      await simulateTyping(response);
-      setIsSubmitting(false);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        // Update: Use 'reply' field from backend response
+        const data = await response.json();
+        await simulateTyping(data.reply);
+      } catch (error) {
+        console.error('Error calling backend:', error);
+        await simulateTyping('I apologize, but I\'m having trouble connecting to the server. Please try again in a moment.');
+      } finally {
+        setIsSubmitting(false);
+      }
     }
   };
 
